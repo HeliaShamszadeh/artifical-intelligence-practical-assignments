@@ -1,0 +1,66 @@
+module BCD_Converter(
+    input [3:0] dec_input,
+    output reg [7:0] BCD1
+);
+
+reg [3:0] digit1 4'b0;
+reg [3:0] digit2 = 4'b0; 
+reg [3:0] BCD1 = 4'b0;		
+reg [3:0] BCD2 = 4'b0;
+//
+//always @* begin
+//    case (dec_input)
+//        0: BCD1 = 4'b0000;
+//        1: BCD1 = 4'b0001;
+//        2: BCD1 = 4'b0010;
+//        3: BCD1 = 4'b0011;
+//        4: BCD1 = 4'b0100;
+//	    5: BCD1 = 4'b0101;
+//		6: BCD1 = 4'b0110;
+//		7: BCD1 = 4'b0111;
+//		8: BCD1 = 4'b1000;  
+//		9: BCD1 = 4'b1001;
+//        default: BCD1 = 4'b0000;
+//    endcase
+//end	   
+//
+always @(dec_input)
+	begin
+		while(dec_input > 9) 
+		 begin
+			dec_input = dec_input - 10;
+			digit2 = digit2 + 1;
+		end
+		digit1 = dec_input;	
+		
+		case (digit1)
+	        0: BCD1 = 4'b0000;  
+	        1: BCD1 = 4'b0001;
+	        2: BCD1 = 4'b0010;
+	        3: BCD1 = 4'b0011;
+	        4: BCD1 = 4'b0100;
+		    5: BCD1 = 4'b0101;
+			6: BCD1 = 4'b0110;
+			7: BCD1 = 4'b0111;
+			8: BCD1 = 4'b1000;  
+			9: BCD1 = 4'b1001;
+	        default: BCD1 = 4'b0000;
+        endcase
+
+        case (digit2)
+	        0: BCD2 = 4'b0000;  
+	        1: BCD2 = 4'b0001;
+	        2: BCD2 = 4'b0010;
+	        3: BCD2 = 4'b0011;
+	        4: BCD2 = 4'b0100;
+		    5: BCD2 = 4'b0101;
+			6: BCD2 = 4'b0110;
+			7: BCD2 = 4'b0111;
+			8: BCD2 = 4'b1000;  
+			9: BCD2 = 4'b1001;
+	        default: BCD2 = 4'b0000;
+        endcase
+		
+	end
+
+endmodule
